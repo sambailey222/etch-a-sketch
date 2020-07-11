@@ -5,3 +5,8 @@
     display: inline-block;
     margin-right: 2px;
   }
+
+  #container {
+    max-width: 1000px;
+    max-height: 1000px;
+  }

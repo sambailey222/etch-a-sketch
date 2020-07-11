@@ -11,7 +11,7 @@ const container = document.querySelector("#container");
 
 
 
-function createRow (size) {
+function createGrid (size) {
     // create size number of rows
     for (let i = 0; i < size; i++) 
     {
@@ -28,10 +28,31 @@ function createRow (size) {
             innerRow.appendChild(column);
             }
     }
+
+    let gridCell = document.querySelectorAll(".cell");
+
+    gridCell.forEach((cell) => {cell.addEventListener ('mouseover', () => 
+    { cell.style.backgroundColor = "black";})
+    });
+
 };
 
-createRow (16);
+createGrid (16);
 
+
+const reset = document.getElementById("reset");
+reset.addEventListener('click', () => resetGrid());
+
+function resetGrid () {
+    // delete old grid
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    //prompt user for new grid size and make a grid that size
+    createGrid(prompt('How many squares per side should the new grid be?'));
+}
+
+// YOU NEED TO MAKE THE WIDTH OF THE NEW SQUARES EQUAL TO WIDTH OF GRID / USER INPUT NUMBER SO THEY WILL ALL FIT
 
 // create 16 divs (rows)
 // loop over each row and append a child div within it (column)
