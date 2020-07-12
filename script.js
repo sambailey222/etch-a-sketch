@@ -17,6 +17,7 @@ function createGrid (size) {
     {
         // create a div for each row and append to container
         let row = document.createElement("div");
+        row.style.height = `${(500/size)}px`;
         container.appendChild(row).id = `row${i}`;
             // fill the newly created row with size number of inline divs
             for (let j = 0; j < size; j++) 
@@ -24,6 +25,8 @@ function createGrid (size) {
             let column = document.createElement("div");
             // cell class has inline display property (means cells stay on same line)
             column.className = "cell"
+            column.style.width = `${(500/size) - 2}px`;
+            column.style.height = `${(500/size) - 2}px`;
             let innerRow = document.getElementById(`row${i}`);
             innerRow.appendChild(column);
             }

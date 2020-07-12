@@ -1,12 +1,13 @@
 .cell {
     border: 1px solid gray;
-    min-width: 20px;
-    min-height: 20px;
+    /* min-width: 20px;
+    min-height: 20px; */
     display: inline-block;
-    margin-right: 2px;
+    /* margin-right: 2px; */
   }
 
   #container {
-    max-width: 1000px;
-    max-height: 1000px;
+    width: 500px;
+    height: 500px;
+    margin: auto;
   }
