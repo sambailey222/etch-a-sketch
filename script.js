@@ -38,18 +38,47 @@ function createGrid (size) {
         // add class giving them 100% width/height (otherwise they won't show. likewise if you write 50% they will only show half)
         createCell.className = 'cell';
         // append each div to the grid 
+        createCell.id = `${i}`;
         container.appendChild(createCell);
     }
 
-    let gridCell = document.querySelectorAll(".cell");
-
-    gridCell.forEach((cell) => {cell.addEventListener ('mouseenter', () => 
-    { cell.style.backgroundColor = "black";})
-    });
-
 };
 
+
+
+
+
 createGrid (16);
+// bgBlack();
+
+let test = document.getElementById(78)
+console.log(test);
+
+const random = document.getElementById("random");
+random.addEventListener('click', () => 
+{
+    let gridCell = document.querySelectorAll(".cell");
+
+    gridCell.forEach((cell) => 
+    {
+        cell.addEventListener ('mouseenter', () => 
+        {
+        cell.style.backgroundColor = randomColor()
+        }
+        )
+    })
+}
+);
+
+function randomColor() {
+    let x = Math.floor(Math.random() * 256);
+    let y = Math.floor(Math.random() * 256);
+    let z = Math.floor(Math.random() * 256);
+    let randomBgColor = `rgb(${x},${y},${z})`;
+    return randomBgColor;
+
+   
+}
 
 
 const reset = document.getElementById("reset");
@@ -62,8 +91,62 @@ function resetGrid () {
     }
     //prompt user for new grid size and make a grid that size
     createGrid(prompt('How many squares per side should the new grid be?'));
+    bgBlack();
 }
 
+// use rgba values
+// set opacity to 10% (0,0,0,0.1)
 
+function increaseOpacity(e) {
+    let cellOpacity = e.style.opacity;
+    cellOpacity += 0.1;
+}
 
+const shade = document.getElementById("shade");
+shade.addEventListener('click', () => shadeGrid());
 
+function shadeGrid () {
+    let gridCell = document.querySelectorAll(".cell");
+    for (let i = 0; i < gridCell.length; i++) 
+    {
+        // gridCell[i].style.backgroundColor = "black";
+        gridCell[i].style.opacity = "0";
+    }
+    gridCell.forEach((cell) => {cell.addEventListener ('mouseenter', () => 
+    {
+       let oldOp = cell.style.opacity;
+       oldOp = Number.parseFloat(oldOp);
+       newOp = oldOp + 0.1;
+       cell.style.opacity = newOp; 
+    })
+    });
+}
+
+const black = document.getElementById("black");
+black.addEventListener('click', () => bgBlack());
+
+function bgBlack() {
+    let gridCell = document.querySelectorAll(".cell");
+    
+    gridCell.forEach((cell) => {cell.addEventListener ('mouseenter', () => 
+    { 
+        
+        // let currentOp = cell.style.opacity;
+        // if (currentOp < 1)
+        // {
+        //     currentOp = Number.parseFloat(currentOp);
+        //     restoreOp = currentOp + 1;
+        //     cell.style.opacity = restoreOp;
+        // }
+    })
+    });
+}
+
+// research into why foreach would override itself
+// think about making the event target the source of the change using (e)
+
+// with each pass += 10%(0.1) opacity
+
+// if opacity reaches 100%, stop
+
+// https://stackoverflow.com/questions/36805322/store-change-and-update-opacity-using-javascript
