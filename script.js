@@ -38,12 +38,12 @@ function resetGrid () {
 // get grid size from user, reprompt if necessary
 function promptGrid() {
     let input = prompt('How many squares per side should the new grid be? Please enter a value between 2 and 64.')
-    if (input < 2 || input > 64) {
-        alert('The value must be between 2 and 64.');
-        promptGrid();
-    } else {
-        return input;
-    }
+    
+    while (input < 2 || input > 64 || isNaN(input)) {
+        alert('The value must be a number between 2 and 64.');
+        input = prompt('How many squares per side should the new grid be? Please enter a value between 2 and 64.')
+    };
+    return input;
 }
 
 // ---- RANDOM COLOUR ---- //
@@ -135,10 +135,10 @@ function shadeGrid () {
         cell.removeEventListener ('mouseenter', randomListener);
         cell.addEventListener ('mouseenter', shadeListener);
     });
-    // remove listeners on ALL cells already touched
+    // remove colour/black listeners on ALL cells already touched
     let shadedGrid = document.querySelectorAll(".noshade");
     shadedGrid.forEach((cell) => {
-        cell.removeEventListener ('mouseenter', shadeListener);
+        // cell.removeEventListener ('mouseenter', shadeListener);
         cell.removeEventListener ('mouseenter', bgBlackListener);
         cell.removeEventListener ('mouseenter', randomListener);
     });
@@ -154,5 +154,3 @@ function shadeGrid () {
 createGrid (16);
 // give black etch as default
 bgBlack();
-
-// https://stackoverflow.com/questions/36805322/store-change-and-update-opacity-using-javascript
